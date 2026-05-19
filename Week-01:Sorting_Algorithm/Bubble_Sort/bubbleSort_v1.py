@@ -4,7 +4,6 @@
 # outer iterations (n - 1 iterations): for loop for n - 1 times, each time we execute the inner iteration
 # inner iterations: for loop through the list, compare list[i] vs list[i + 1] and do a swap if left > right
 
-
 # Course pseudocode
 
 # Bubble sort
@@ -25,8 +24,8 @@ arr = [16, 14, 10, 8, 7, 8, 3, 2, 4, 1]
 print(arr)
 
 n = len(arr)
-for outer_index in range(1, n-1):
-    for inner_index in range(1, n-1):
+for outer_index in range(1, n):
+    for inner_index in range(1, n):
         firstNumber = arr[inner_index - 1]
         secondNumber = arr[inner_index]
         
