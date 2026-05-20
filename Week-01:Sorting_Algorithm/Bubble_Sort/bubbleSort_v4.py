@@ -35,14 +35,68 @@
 #     3.3 Optimization from v2
 #         if haveSwapped == False -> break (the outer loop)
 
-arr = [16, 14, 10, 8, 7, 8, 3, 2, 4, 1]
+# arr = [16, 14, 10, 8, 7, 8, 3, 2, 4, 1]
+# n = len(arr)
+# latestSwapPosition = n - 1
+
+# print(arr)
+
+# for outer_index in range(1, n):
+#     haveSwapped = False
+#     for inner_index in range(1, latestSwapPosition + 1):
+#         firstNumber = arr[inner_index - 1]
+#         secondNumber = arr[inner_index]
+        
+#         if firstNumber > secondNumber:
+#             arr[inner_index - 1], arr[inner_index] = arr[inner_index], arr[inner_index - 1]
+#             haveSwapped = True
+#             latestSwapPosition = inner_index
+            
+#     if (haveSwapped == False): 
+#         break
+    
+# print(arr)
+
+
+# CORRECT DESIGN ALGO AND IMPLEMENTATION
+# Review in optimization v2, the swapped boolean is used for while loop (outer iteration)
+# The inner loop is only executed until the latest row swap
+
+# test cases
+# 1st outer loop: {
+#   [14, 16, 8, 7, 8, 3, 2, 4, 1, 16]
+#   latestSwapPosition = n - 1
+#} => there are swaps so we continue
+
+# 2nd outer loop: {
+#   [14, 8, 7, 8, 3, 2, 4, 1, 16, 16]  
+#   latestSwapPosition = n - 2
+
+# 3rd outer loop: {
+#   [6, 7, 8, 3, 2, 4, 1, 14, 16, 16]  
+#   latestSwapPosition = n - 3
+
+# 4th outer loop: {
+#   [6, 7, 3, 2, 4, 1, 8, 14, 16, 16]  
+#   latestSwapPosition = n - 4
+
+# 5th outer loop: {
+#   [6, 3, 2, 4, 1, 7, 8, 14, 16, 16]  
+#   latestSwapPosition = n - 5
+
+
+# My own code 
+# correct in sorting but did 1 more uncessary comparision
+# if it's strictly optimized, this can go wrong
+arr = [16, 14, 16, 6, 7, 8, 3, 2, 4, 1]
 n = len(arr)
+haveSwapped = True
 latestSwapPosition = n - 1
 
 print(arr)
 
-for outer_index in range(1, n):
-    haveSwapped = False;
+while (haveSwapped == True ):
+    haveSwapped = False
     for inner_index in range(1, latestSwapPosition + 1):
         firstNumber = arr[inner_index - 1]
         secondNumber = arr[inner_index]
@@ -50,9 +104,25 @@ for outer_index in range(1, n):
         if firstNumber > secondNumber:
             arr[inner_index - 1], arr[inner_index] = arr[inner_index], arr[inner_index - 1]
             haveSwapped = True
-            latestSwapPosition = inner_index
-            
-    if (haveSwapped == False): 
-        break
+            latestSwapPosition = inner_index 
     
 print(arr)
+
+# PREFERRED CODE
+
+# arr = [16, 14, 16, 6, 7, 8, 3, 2, 4, 1]
+# n = len(arr)
+# haveSwapped = True
+
+# while (haveSwapped == True ):
+#     haveSwapped = False
+#     new_n = 0
+#     for inner_index in range(1, n):
+#         firstNumber = arr[inner_index - 1]
+#         secondNumber = arr[inner_index]
+        
+#         if firstNumber > secondNumber:
+#             arr[inner_index - 1], arr[inner_index] = arr[inner_index], arr[inner_index - 1]
+#             haveSwapped = True
+#             new_n = inner_index 
+#     n = new_n

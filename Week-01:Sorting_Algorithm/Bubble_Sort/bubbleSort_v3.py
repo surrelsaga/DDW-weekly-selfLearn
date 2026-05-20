@@ -26,28 +26,47 @@
 #     3.4 Optimization from v2
 #         if haveSwapped == False -> break (the outer loop)
 
+# arr = [16, 14, 10, 8, 7, 8, 3, 2, 4, 1]
+# n = len(arr)
+# inner_iteration = n - 1
+
+# print(arr)
+
+# for outer_index in range(1, n):
+#     haveSwapped = False;
+#     for inner_index in range(1, inner_iteration + 1):
+#         firstNumber = arr[inner_index - 1]
+#         secondNumber = arr[inner_index]
+        
+#         if firstNumber > secondNumber:
+#             arr[inner_index - 1], arr[inner_index] = arr[inner_index], arr[inner_index - 1]
+#             haveSwapped = True
+            
+#     if (haveSwapped == False): 
+#         break        
+#     inner_iteration -= 1
+    
+# print(arr)
+
+# Review in optimization v2, the swapped boolean is used for while loop (outer iteration)
+
 arr = [16, 14, 10, 8, 7, 8, 3, 2, 4, 1]
 n = len(arr)
+haveSwapped = True
 inner_iteration = n - 1
 
 print(arr)
 
-for outer_index in range(1, n):
-    haveSwapped = False;
+while( haveSwapped == True ):
+    haveSwapped = False
     for inner_index in range(1, inner_iteration + 1):
         firstNumber = arr[inner_index - 1]
         secondNumber = arr[inner_index]
         
         if firstNumber > secondNumber:
             arr[inner_index - 1], arr[inner_index] = arr[inner_index], arr[inner_index - 1]
-            haveSwapped = True
-            
-    if (haveSwapped == False): 
-        break        
+            haveSwapped = True     
     inner_iteration -= 1
     
 print(arr)
-    
-
-
 
