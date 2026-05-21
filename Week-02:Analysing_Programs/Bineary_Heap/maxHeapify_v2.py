@@ -46,27 +46,30 @@ def right(index):
 
 def max_heapify(arr, indexOfCurrentNode):
     current_i = indexOfCurrentNode #start from index of current node (input)
-    swapped = True
     
-    while( left(current_i) < len(arr) and swapped == True ): #ensure that the current node have children
-        swapped = False
+    while( left(current_i) < len(arr) ): #ensure that the current node have children
+        left_i = left(current_i)
+        right_i = right(current_i)
         
-        max_child = max( arr[left(current_i)], arr[right(current_i)] )
-        # Finding the index of the larget child node element
-        if( max_child == arr[left(current_i)] ):
-            max_child_i = left(current_i)
+        if ( right_i >= len(arr) ): #if a node has only 1 child then max child = that one
+            max_child_i = left_i
         else:
-            max_child_i = right(current_i)
+            max_child = max( arr[left_i], arr[right_i] )
+
+            # Finding the index of the larget child node element
+            if( max_child == arr[left(current_i)] ):
+                max_child_i = left(current_i)
+            else:
+                max_child_i = right(current_i)
         
         # if the child node element larger than current node element, swap (push the node element down)
         if arr[max_child_i] > arr[current_i]:
             arr[max_child_i], arr[current_i] = arr[current_i], arr[max_child_i]
-            swapped = True #record the swap
+        else: #if no swap then, it satisfies the property alr -> stop the loop
+            break
             
         # move to the position (index of the larger child node) to continue analyzing
         current_i = max_child_i
-        
-    return arr
     
 max_heapify(arr, 1)
 print(arr)
