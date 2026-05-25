@@ -85,17 +85,29 @@ def max_heapify(arr, indexOfCurrentNode, heap_end_pos):
 # just need to build_max_heap to find the next largest and continue swapping
 # => heap_end defines the exclusive boundary of the active heap
 # the heap occupies indices [0, heap_end]
-def build_max_heap(arr, heap_end_pos):
+def build_max_heap(arr):
+    n = len(arr)
     # previously the heap_end here is n (len(arr))
-    starting_index = (heap_end_pos // 2) - 1
+    starting_index = (n // 2) - 1
     
     for current_index in range(starting_index, -1, -1):
-        max_heapify(arr, current_index, heap_end_pos)
+        max_heapify(arr, current_index, n)
         
+# my own helper function to help with building max-heap property
+# for the remaing portion of the heap after first build
+def rebuild_heap_portion(arr, heap_end_pos):
+    # slice -> get a copy of the remaining portion
+    portion = arr[0: heap_end_pos + 1]
+    
+    # build max-heap property on that sliced copy
+    build_max_heap(portion)
+    
+    # reassigned the max-heap satisfied copy portion back to the array
+    arr[0: heap_end_pos + 1] = portion
         
 def heapSort(arr):
     n = len(arr)
-    build_max_heap(arr, n) #find largest from 0 to n - 1
+    build_max_heap(arr) #find largest from 0 to n - 1
     heap_end_pos = n - 1 #first swap to the latest element
     
     while( heap_end_pos > 0 ):
@@ -105,7 +117,7 @@ def heapSort(arr):
         
         # continue build-max-heap to find next largest element
         # '+1' because in build-max-heap algo, we need the array length
-        build_max_heap(arr, heap_end_pos + 1)
+        rebuild_heap_portion(arr, heap_end_pos)
 
          
 heapSort(arr)
