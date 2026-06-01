@@ -43,4 +43,13 @@
 #     2.2 Move the last disk n from source to destination tower
 #     2.3 Move the first n - 1 disks from the auxiliary tower to the destination tower
 
+def towerOfHanoi(n, source, destination, auxiliary):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {destination}")
+        return
+    else:
+        towerOfHanoi(n - 1, source, auxiliary, destination)
+        print(f"Move disk {n} from {source} to {destination}")
+        towerOfHanoi(n - 1, auxiliary, destination, source)
         
+towerOfHanoi(3, 'A', 'B', 'C')
