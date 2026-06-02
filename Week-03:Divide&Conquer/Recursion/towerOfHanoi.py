@@ -53,3 +53,55 @@ def towerOfHanoi(n, source, destination, auxiliary):
         towerOfHanoi(n - 1, auxiliary, destination, source)
         
 towerOfHanoi(3, 'A', 'B', 'C')
+
+# Imagine the execution process
+# n = 3
+# first the else block gets executed
+# line 51 is executed and line 52 needs to wait for 51 to be done executing
+
+# Execution of when n = 3 and line 51 is executed: towerOfHanoi(3, 'A', 'B', 'C')
+    # Call towerOfHaNoi(2, 'A', 'C', 'B')
+        # Then call towerOfHaNoi(1, 'A', 'B', 'C')
+            # Then print "Move disk 1 from A to B"
+            # towerOfHaNoi(1, 'A', 'B', 'C') is done executing, return nothing
+        
+        # print "Move disk 2 from A to C"
+        
+        # Then call towerOfHaNoi(1, 'B', 'C', 'A')
+            # Print "Move disk 1 from B to C"
+            # towerOfHaNoi(1, 'B', 'C', 'A') is done executing, return nothing
+            
+    # Print "Move disk 3 from A to B"
+    
+    # Call towerOfHaNoi(2, 'C', 'B', 'A')
+        # Then call towerOfHaNoi(1, 'C', 'A', 'B')
+            # Then print "Move disk 1 from C to A"
+            # towerOfHaNoi(1, 'C', 'B', 'A') is done executing, return nothing
+        
+        # print "Move disk 2 from C to B"
+        
+        # Then call towerOfHaNoi(1, 'A', 'B', 'C')
+            # Print "Move disk 1 from A to B"
+            # towerOfHaNoi(1, 'A', 'B', 'C') is done executing, return nothing
+            
+
+# Final output:
+# Move disk 1 from A to B
+# Move disk 2 from A to C
+# Move disk 1 from B to C
+# Move disk 3 from A to B
+# Move disk 1 from C to A
+# Move disk 2 from C to B
+# Move disk 1 from A to B
+        
+
+# FINALiZED PATTERN
+# Base case: when there is one disk left, we move it from the source to destination
+# Recursive:
+# - Move top disks (except the bottom one) to the auxiliary
+# - Move bottom disk to the destination
+
+# - Repeat the 2 steps above with the top disks (mentioned in step 1)
+        
+        
+
