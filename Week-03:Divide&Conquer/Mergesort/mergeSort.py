@@ -18,6 +18,9 @@
 # we start sorting the array first before we merge
 
 # pseudo:
+
+# BREAK THE PROBLEMS DOWN: we need 2 different operations: merge and mergeSort
+
 # Merge Sort
 # Input:
 #  - array = sequence of integers
@@ -33,8 +36,10 @@
 
 
 # Merge
-# Input:
 
+# We have one array, we split in half => then we sort each splited arrays, then merge them
+
+# Input:
 # - array = sequence of integers
 # - p = beginning index of left array, which is also the beginning of the input sequence
 # - q = ending index of left array
@@ -77,6 +82,7 @@ def merge(array, p, q, r):
     right = 0
     dest = p
     
+    # 2 pointers point to index in left and right array
     while left < nleft and right < nright:
         if left_array[left] <= right_array[right]:
             array[dest] = left_array[left]
@@ -87,11 +93,13 @@ def merge(array, p, q, r):
         
         dest += 1
     
+    # right array is exhauted, we only point to index in left array
     while left < nleft:
         array[dest] = left_array[left]
         left += 1
         dest += 1
         
+    # left array is exhauted, we only point to index in right array
     while right < nright:
         array[dest] = right_array[right]
         right += 1
