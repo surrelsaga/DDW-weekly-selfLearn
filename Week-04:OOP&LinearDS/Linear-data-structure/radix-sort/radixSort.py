@@ -92,12 +92,12 @@ def radixSort(array):
     # set up 10 radix queues
     radix_queues = [Queue() for _ in range(10)]
     
+    # put all numbers into the main bin queue
+    for number in array:
+        main_queue.enqueue(number)
+    
     # outer loop: digit pass
     for i in range(max_digits):
-        
-        # put all numbers into the main bin queue
-        for number in array:
-            main_queue.enqueue(number)
             
         # take each number out inside the main queue and extract the digit(first digit is ones, second is tens, third is hundreds)
         # the formula is that (number // 10^i) % 10
