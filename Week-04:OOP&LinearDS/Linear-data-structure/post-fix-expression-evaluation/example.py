@@ -41,7 +41,47 @@ class Stack:
         self.items.append(value)
         
     def pop(self):
-        self.items.pop()
+        return self.items.pop()
         
     def peek(self):
         return self.items[-1]
+
+# Main function to evaluate a post fix expression
+def evaluate_postfix(expression):
+    operandStack = Stack()
+    
+    # Separate characters inside the string
+    # we gather them in a list
+    chars = expression.split(' ')
+    
+    for char in chars:
+        # if a character is an operand (a digit)
+        if char.isnumeric() == True:
+            # convert to number type first because after split, the digit is a str
+            char = int(char)
+            operandStack.push(char)
+        # if it's an operator (+, -, :, x)
+        else:
+            right_operand = operandStack.pop()
+            left_operand = operandStack.pop()
+            
+            if char == '+':
+                result = left_operand + right_operand
+            elif char == '-':
+                result = left_operand - right_operand
+            elif char == '*':
+                result = left_operand * right_operand
+            elif char == '/':
+                result = left_operand / right_operand
+                
+            operandStack.push(result)
+                
+    # when the loop is over, the final number will be the result of the expression
+    return operandStack.pop()
+
+expression = "4 2 / 3 +"
+
+print( evaluate_postfix(expression) )
+                
+            
+            
