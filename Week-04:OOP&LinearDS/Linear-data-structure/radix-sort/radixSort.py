@@ -101,13 +101,16 @@ def radixSort(array):
             
         # take each number out inside the main queue and extract the digit(first digit is ones, second is tens, third is hundreds)
         # the formula is that (number // 10^i) % 10
-        for j in range( len(main_queue.items) ):
+        while len(main_queue.items) != 0:
+            # current number that we are targeting in the main queue, starting from the very first number
+            current_number = main_queue.dequeue()
+            
             # the extracted digits should only be from 0 to 9
-            extracted_digit = ( main_queue.items[j] // pow(10, i) ) % 10
+            extracted_digit = ( current_number // pow(10, i) ) % 10
             
             # we will put the numbers in their corresponding bins
             # e.g: 34 -> by ones, digit is 4 -> put in bin 4. Bin ranges from 0 to 9
-            radix_queues[extracted_digit].enqueue( main_queue.items[j] )
+            radix_queues[extracted_digit].enqueue( current_number )
             
         # After the numbers are put in their correct bins, we take them out
         # starting with bin 0, put back to the main queue
@@ -116,8 +119,14 @@ def radixSort(array):
         for radix_queue in radix_queues:
             
             # put all the items inside a bin in the main queue
-            for number in radix_queue.items:
-                main_queue.enqueue(number)
+            # while putting all items inside a radix bin to the main queue, we also need to remove them from the radix bins
+            # so it's more like MOVING the items from radix bins to the main bin
+            
+            while len(radix_queue.items) != 0:
+                # current number inside the radix queue that is targeted, starting from the very first number
+                current_number = radix_queue.dequeue()
+                
+                main_queue.enqueue(current_number)
                 
     
     # After we're done with the outer loop, the main queue will contain the sorted ascendingly array
