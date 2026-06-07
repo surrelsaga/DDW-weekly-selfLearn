@@ -16,3 +16,6 @@ Instead of telling `build_max_heap` where to stop, I just give it the exact port
 This keeps `build_max_heap` simple (no extra parameter) and makes the intent at the call site clearer. The trade-off is that slicing creates a temporary copy each iteration, but for the purposes of this learning exercise it is a clean and readable approach.
 
 **Key reminder:** Python list slicing returns a *copy*, not a view — always reassign back to the original array if you want changes to persist. Thanks to python revision in week 02, it reminds me of python list slicing.
+
+
+## WEEk 03 - 
