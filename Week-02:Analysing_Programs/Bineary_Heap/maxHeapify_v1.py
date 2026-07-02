@@ -85,4 +85,3 @@ def max_heapify(arr, indexOfCurrentNode):
     
 max_heapify(arr, 1)
 print(arr)
-

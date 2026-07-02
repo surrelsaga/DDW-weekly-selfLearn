@@ -93,31 +93,19 @@ def build_max_heap(arr):
     for current_index in range(starting_index, -1, -1):
         max_heapify(arr, current_index, n)
         
-# my own helper function to help with building max-heap property
-# for the remaing portion of the heap after first build
-def rebuild_heap_portion(arr, heap_end_pos):
-    # slice -> get a copy of the remaining portion
-    portion = arr[0: heap_end_pos + 1]
-    
-    # build max-heap property on that sliced copy
-    build_max_heap(portion)
-    
-    # reassigned the max-heap satisfied copy portion back to the array
-    arr[0: heap_end_pos + 1] = portion
-        
 def heapSort(arr):
     n = len(arr)
     build_max_heap(arr) #find largest from 0 to n - 1
     heap_end_pos = n - 1 #first swap to the latest element
-    
+
     while( heap_end_pos > 0 ):
         arr[0], arr[heap_end_pos] = arr[heap_end_pos], arr[0]
         # the new latest element position is moved backward by 1 (the previous last element is the largest alr)
         heap_end_pos -= 1
-        
-        # continue build-max-heap to find next largest element
-        # '+1' because in build-max-heap algo, we need the array length
-        rebuild_heap_portion(arr, heap_end_pos)
+
+        # only the root broke the heap property, so just sift it back down
+        # within the active heap [0, heap_end_pos] (exclusive boundary = heap_end_pos + 1)
+        max_heapify(arr, 0, heap_end_pos + 1)
 
          
 heapSort(arr)
