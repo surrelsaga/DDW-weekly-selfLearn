@@ -48,8 +48,11 @@ def towerOfHanoi(n, source, destination, auxiliary):
         print(f"Move disk 1 from {source} to {destination}")
         return
     else:
+        # subtask: move first n - 1 disks to auxiliary
         towerOfHanoi(n - 1, source, auxiliary, destination)
+        # ultimate goal of every recursion: move bottom disk to detination
         print(f"Move disk {n} from {source} to {destination}")
+        # new subtask: the stack of disk now is reduced by 1, we need to move from auxiliary(new source) to (destination)
         towerOfHanoi(n - 1, auxiliary, destination, source)
         
 towerOfHanoi(3, 'A', 'B', 'C')

@@ -90,7 +90,7 @@ def merge(array, p, q, r):
         else:
             array[dest] = right_array[right]
             right += 1
-        
+         
         dest += 1
     
     # right array is exhauted, we only point to index in left array
