@@ -19,9 +19,9 @@ def insertion_sort(arr, n=None):
         innerindex -= 1
     
     arr[innerindex] = numberToTakeOut
-    
-    return arr
         
 data = [16, 14, 10, 8, 7, 8, 3, 2, 4, 1]
-print(insertion_sort(data))
+insertion_sort(data)
+
+print(data)
     
