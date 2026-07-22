@@ -28,6 +28,14 @@ pandas .loc (by label, end INCLUSIVE):
 pandas .iloc (by position, end EXCLUSIVE):
 - e.g: `df.iloc[0:10, [1, 3, -1]]`  => rows 0..9 = 10 rows, columns by position
 
+watch out: to combine conditions use `&` (and) / `|` (or) with parentheses around EACH condition
+- e.g: `df.loc[(df['price'] > 500_000) & (df['town'] == 'ANG MO KIO'), cols]`
+- NOT python's `and`/`or` (those don't work elementwise), it's the bitwise `&`/`|`
+
+other handy pandas stuff:
+- `df.describe()` => quick stats table (mean, std, min, max, quartiles) for numeric columns
+- `df['col'].apply(lambda x: ...)` => run a function across a whole column (vectorized transform)
+
 numpy (by position, end EXCLUSIVE):
 - e.g: `array[0]` or `array[0, :]`  => first row
 - e.g: `array[:, 0]`  => first column
@@ -37,6 +45,16 @@ numpy (by position, end EXCLUSIVE):
 careful: for reduction functions (`sum`, `mean`, `std`) the `axis` arg means the OPPOSITE of what you'd guess
 `axis=0` => collapses DOWN the rows => you get one value PER COLUMN
 `axis=1` => collapses across columns => you get one value PER ROW
+
+making numpy arrays (other than the constructor `np.array([...])`):
+- `df.to_numpy()`  => straight from a pandas dataframe
+- `np.zeros((rows, cols))`, `np.ones((rows, cols))`  => filled with 0s / 1s
+- `array.shape`  => tells you the dimensions, e.g. `(95858, 11)` = 95858 rows, 11 cols
+
+broadcasting: this is the whole point of numpy over pandas. ops just "spread" automatically
+- `array * 2` => multiplies EVERY element (scalar spreads over the array)
+- a `(2,1)` vector + a `(2,3)` matrix => the vector expands across the columns to fit
+- `np.matmul(A, B)` => matrix multiplication, inner dims must match (cols of A == rows of B)
 
 2\. Normalization (they make you write these functions in the pset)
 
@@ -57,3 +75,7 @@ distribution of one variable: histplot (histogram)
 categorical comparison: boxplot, barplot
 
 extra: `hue='column'` colours the plot by another column. boxplot outliers are capped at Q1 - 1.5*IQR and Q3 + 1.5*IQR (NOT the real min/max)
+
+extra: `sns` is built ON TOP of matplotlib (higher-level, less typing, but you can still customize with plt)
+- `sns.set()` => switches to seaborn's theme (grey background + gridlines) instead of matplotlib's plain white
+- `pairplot` => matrix of every pairwise relationship at once (scatter for each pair of columns)
